@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05 9, 21, 11:08:48 AM
+    Author     : user
+*/
+
+.main-body{
+    width: 100%;
+}
+
+.search-bar{
+    left: 100px;
+}
+.background{
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(0, 255, 85,.73)),url(images/market.jpg);
+    background-size: cover;
+}
+.center{
+
+
+    
+    margin-top: 20%;
+   background: #66cc66;
+   border-radius:10px;
+ 
+}
+ h1{
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+}
+.par{
+        color: #404F5E;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size:20px;
+        margin: 0;
+}
+.checkmark{
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+     
+}
+.cardi{
+        background: white;
+        padding: 20px;
+        border-radius:20px;
+        box-shadow: 0 2px 3px #C8D0D8;
+      
+       
+      
+}       

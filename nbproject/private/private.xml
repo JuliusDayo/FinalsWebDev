@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/RegisterBrandCategPage.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/Products.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/Home.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/RegisterProduct.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/RegisterUserPage.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/Logout.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/Login.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/models/LoginModel.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/web/views/includes/register_brand_category.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/web/views/includes/edit_product.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/web/views/templates/sidebar.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/web/views/includes/product_list.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/models/ConnectionDB.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/models/EditProduct.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/RegisterPage.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/RegisterUser.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/controllers/EditController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/web/views/includes/register_user.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/Finals/src/java/models/UserModel.java</file>
+        </group>
+    </open-files>
+</project-private>
