@@ -42,12 +42,13 @@ public class Home extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         String sessname = (String)session.getAttribute("username");
-        if (sessname != null) {
+        System.out.print(sessname);
+        if (!session.isNew()) {
 
             RequestDispatcher rd = request.getRequestDispatcher("views/includes/dashboard.jsp");
             rd.forward(request, response);
         }
-            System.out.println(sessname);
+           
             RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
             rd.forward(request, response);
         

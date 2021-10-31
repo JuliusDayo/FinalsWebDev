@@ -21,7 +21,7 @@ public class ConnectionDB {
 
 
         try{
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         Class.forName(driver);
         
         String url = "jdbc:mysql://localhost/midterm";
