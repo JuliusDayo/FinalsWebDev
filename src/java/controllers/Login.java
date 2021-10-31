@@ -25,7 +25,8 @@ import models.LoginModel;
 public class Login extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -36,25 +37,24 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
-        
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        if(LoginModel.validate(username,password)){
-            
-        HttpSession session =  request.getSession();
-        session.setAttribute("username", username);
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/Home");
-        rd.include(request, response);
-        }else{
-           
-        System.out.println("failed to login");
-        RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
-        rd.forward(request, response);
+
+        if (LoginModel.validate(username, password)) {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+
+            if (!session.isNew()) {
+                RequestDispatcher rd = request.getRequestDispatcher("/Home");
+                rd.include(request, response);
+            }
+        } else {
+
+            System.out.println("failed to login");
+            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
+            rd.forward(request, response);
         }
     }
 
