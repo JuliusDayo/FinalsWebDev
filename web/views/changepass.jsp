@@ -11,8 +11,8 @@
   padding: 100px;
 }
 .login-box{
-    width: 320px;
-    height: 420px;
+    width: 400px;
+    height: 600px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     top: 50%;
@@ -83,6 +83,9 @@ h1{
     color: #39dc79;
 }
 
+
+
+
 </style>
 </head>
 <body>
@@ -91,15 +94,21 @@ h1{
            
            <div class="login-box">
            <img src="logo.png" class="avatar">   
-           <h1>Login Here</h1>
+           <h1>Change Password</h1>
            
+           <label for="email"> Email </label> 
+	   <input type="text" input id="email" name="email"placeholder="Enter Email Address">
+	   
            <label for="username"> Username </label> 
 	   <input type="text" input id="username" name="username"placeholder="Enter Username">
 	   
-	   <label for="password"> Password </label> 
-	   <input type="password" input id="password" name="password"placeholder="Enter Password">
-	   <input type="submit" input id="button" name="button" value="Submit">
-           <a href="changepass.jsp"> Change password </a>
+	   <label for="password"> New Password </label> 
+	   <input type="password" input id="password" name="password"placeholder="Enter New Password">
+           
+           <label for="password"> Confirm Password </label> 
+	   <input type="password" input id="password" name="password"placeholder="Confirm New Password">
+	   <input type="submit" input id="button" name="button" value="Change Password">
+           <a href="login.jsp" >&laquo; Back to log in page</a>
 	   </div>
             
         </form>
