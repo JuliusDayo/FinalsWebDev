@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
             <file>file:/C:/Users/gavin/Documents/NetBeansProjects/FinalsWebDev/src/java/models/UserModel.java</file>
             <file>file:/C:/Users/gavin/Documents/NetBeansProjects/FinalsWebDev/web/APPLY.html</file>
             <file>file:/C:/Users/gavin/Documents/NetBeansProjects/FinalsWebDev/src/java/models/ConnectionDB.java</file>
             <file>file:/C:/Users/gavin/Documents/NetBeansProjects/FinalsWebDev/web/views/landing_page.jsp</file>
             <file>file:/C:/Users/gavin/Documents/NetBeansProjects/FinalsWebDev/web/index.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/models/LoginModel.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/Login.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/RegisterPage.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/EditController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/models/ConnectionDB.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/RegisterBrandCategPage.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/Products.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/Home.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/FinalsWebDev/src/java/controllers/DeleteController.java</file>
+
         </group>
     </open-files>
 </project-private>
