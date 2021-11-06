@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         Object validate = LoginModel.validate(username, password)[0];
-        System.out.println(validate==true);
+        
         if (true) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
