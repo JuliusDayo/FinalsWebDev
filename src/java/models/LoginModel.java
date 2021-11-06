@@ -17,13 +17,15 @@ import java.sql.SQLException;
  */
 public class LoginModel {
     
-    public static boolean validate(String username,String password) throws ClassNotFoundException, SQLException{
-        boolean status= false;
+    public static Object[] validate(String username,String password) throws ClassNotFoundException, SQLException{
+        Object[] data = new Object[2];
+        
+        data[0] = false;
         try{
             Connection conn =null;
             PreparedStatement ps = null;
             
-            String query = "SELECT username,password FROM users "
+            String query = "SELECT username,password,role_ID FROM users "
                     + "WHERE username =?; ";
             
             conn = ConnectionDB.getConnection();
@@ -34,7 +36,8 @@ public class LoginModel {
             rs.next();
             boolean matched = SCryptUtil.check(password, rs.getString("password"));
             if(matched){
-                status = true;
+                data[0] = true;
+                data[1] = rs.getString("role_ID");
             }else{
             rs.next();
             }
@@ -43,7 +46,7 @@ public class LoginModel {
         }catch(SQLException e){
             System.out.println("validate error " +e);
         }
-        return status;
+        return data;
     }
     
 }
