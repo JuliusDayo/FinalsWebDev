@@ -37,7 +37,7 @@ public class LoginModel {
             boolean matched = SCryptUtil.check(password, rs.getString("password"));
             if(matched){
                 data[0] = true;
-                data[1] = rs.getString("role_ID");
+                data[1] = rs.getInt("role_ID");
             }else{
             rs.next();
             }

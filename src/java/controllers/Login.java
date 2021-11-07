@@ -41,11 +41,14 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Object validate = LoginModel.validate(username, password)[0];
-        
-        if (true) {
+        boolean validate = (Boolean) LoginModel.validate(username, password)[0];
+        int role_ID = (int) LoginModel.validate(username, password)[1];
+       
+        System.out.println(role_ID);
+        if (validate) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+            session.setAttribute("role_ID" , role_ID);
 
             if (!session.isNew()) {
                 RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");

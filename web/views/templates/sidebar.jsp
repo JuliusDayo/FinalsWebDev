@@ -66,12 +66,18 @@
                         </li>
                     </ul>
                 </li>
+                <%
+                    int role = (int) session.getAttribute("role_ID");
+                    if(role==1){
+                %>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/RegisterUserPage" class="nav-link ">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Users</p>
                     </a>
                 </li>
+                <% } %>         
+                                
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
