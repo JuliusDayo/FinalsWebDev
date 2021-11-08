@@ -14,7 +14,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-                   url = "jdbc:mysql://localhost/midterm"
+                   url = "jdbc:mysql://localhost:33061/midterm"
                    user = "root" password = ""/>
 
 <sql:query dataSource = "${snapshot}" var = "result2">
@@ -69,9 +69,7 @@
                                     <% } %>
                                     ><i class="fas fa-edit" ></i></button>
                             <button class="btn-danger btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-${row.product_ID}"
-                                    <% if(role!=1){ %>
-                                        disabled
-                                    <% } %>
+                                    <% if(role!=1){ %> disabled <% } %>
                                     ><i class="fas fa-trash-alt" ></i></button>
                             <form action="${pageContext.request.contextPath}/EditController" type="submit">
                                 <input  hidden>
