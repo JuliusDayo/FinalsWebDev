@@ -14,7 +14,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-                   url = "jdbc:mysql://localhost/midterm"
+                   url = "jdbc:mysql://localhost:3306/midterm"
                    user = "root" password = ""/>
 
 <sql:query dataSource = "${snapshot}" var = "result2">
@@ -62,8 +62,15 @@
                         <td><c:out value ="${row.brand_name}"/></td>
                         <td><c:out value ="${row.product_stocks}"/></td>
                         <td class="">
-                            <button class="btn-success btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${row.product_ID}" ><i class="fas fa-edit" ></i></button>
-                            <button class="btn-danger btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-${row.product_ID}" ><i class="fas fa-trash-alt" ></i></button>
+                            <% int role = (int) session.getAttribute("role_ID");%>
+                            <button class="btn-success btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${row.product_ID}"
+                                    <% if(role!=1){ %>
+                                        disabled
+                                    <% } %>
+                                    ><i class="fas fa-edit" ></i></button>
+                            <button class="btn-danger btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-${row.product_ID}"
+                                    <% if(role!=1){ %> disabled <% } %>
+                                    ><i class="fas fa-trash-alt" ></i></button>
                             <form action="${pageContext.request.contextPath}/EditController" type="submit">
                                 <input  hidden>
 
@@ -130,7 +137,6 @@
                                 <!-- /.modal -->
                             </form>
                             <form>
-                                
                                 <div class="modal fade" id="modal-delete-${row.product_ID}">
                                     <div class="modal-dialog">
                                         <div class="modal-content bg-danger">
@@ -142,12 +148,10 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>${row.product_name} will be permanently deleted!</p>
-                                                
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                                                 <button class="btn-outline-light btn" value="${row.product_ID}" id="product_ID" name="product_ID" type="submit" formaction="${pageContext.request.contextPath}/DeleteController" data-toggle="tooltip" data-placement="top" title="Deleting is irreversible" >Delete</button>
-                                                
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
