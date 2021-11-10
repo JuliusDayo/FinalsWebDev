@@ -14,7 +14,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-                   url = "jdbc:mysql://localhost:33061/midterm"
+                   url = "jdbc:mysql://localhost:3306/midterm"
                    user = "root" password = ""/>
 
 <sql:query dataSource = "${snapshot}" var = "result2">
