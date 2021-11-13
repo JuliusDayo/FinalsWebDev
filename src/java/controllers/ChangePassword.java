@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controllers;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,13 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.LoginModel;
+import models.UserModel;
 
 /**
  *
  * @author user
  */
-public class Login extends HttpServlet {
+public class ChangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,33 +30,31 @@ public class Login extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        boolean validate = (Boolean) LoginModel.validate(username, password)[0];
-        int role_ID = (int) LoginModel.validate(username, password)[1];
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
+        
+        String curr_pass = request.getParameter("curr_pass");
+        String new_pass = request.getParameter("new_pass");
+        
+        
+        HttpSession session = request.getSession(false);
+        String username = (String) session.getAttribute("username");
+        
        
-       
-        if (validate) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("role_ID" , role_ID);
-
-            if (!session.isNew()) {
-                RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");
-                rd.include(request, response);
-            }
-        } else {
-
-            System.out.println("failed to login");
-            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
+        UserModel changePass = new UserModel();
+        boolean changed =  changePass.changePassword(username, curr_pass, new_pass);
+        
+        if(changed){
+            System.out.println("Success");
+            RequestDispatcher rd = request.getRequestDispatcher("/ProfilePage");
             rd.forward(request, response);
+        }else{
+            System.out.println("Failed");
+           RequestDispatcher rd = request.getRequestDispatcher("/ProfilePage");
+            rd.forward(request, response); 
         }
     }
 
@@ -76,8 +72,8 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -94,8 +90,8 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

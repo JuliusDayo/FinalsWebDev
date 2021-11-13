@@ -6,11 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="templates/header.jsp" />            
+<jsp:include page="templates/sidebar.jsp"/>
 
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
 
             body{
@@ -61,12 +60,9 @@
             }
         </style>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        
+        
 
-        <title>Profile Page</title>
-    </head>
-    <body>
         <div class="col-md-7">         
             <div class="card card-primary">
 
@@ -76,13 +72,13 @@
 
                 <div class="card-body">
 
-                    <form>
+                    <form action="${pageContext.request.contextPath}/ChangePassword" method="post">
 
                         <div class="form-group col-sm-6">
                             <label>Current Password</label>
                         </div>
                         <div class="col-7">
-                            <input type="password" class="form-control" >
+                            <input type="password" class="form-control" name="curr_pass">
                         </div>
 
 
@@ -91,7 +87,7 @@
                             <label>New Password</label>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" >
+                            <input type="text" class="form-control" name="new_pass" id="new_pass">
                         </div>
 
 
@@ -100,7 +96,7 @@
                             <label>Confirm Password</label>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" >
+                            <input type="text" class="form-control" name="confirm_pass" id="confirm_pass" onchange="ifMatched()" value="">
                         </div>
 
                         <div class="card-footer">
@@ -110,7 +106,20 @@
                 </div>
             </div>
         </div>
+                    
+                    <script>
+                        var new_pass = document.getElementById("new_pass");
+                        var confirm_pass = document.getElementById("confirm_pass");
+                        
+                        const ifMatched = () =>{
+                            
+                             if(new_pass.value !== confirm_pass.value){
+                                alert('notmatched');
+                             }
+        
+                        };
+                        
+                    </script>
+<jsp:include page="templates/footer.jsp"/>
 
-
-    </body>
-</html>
+   

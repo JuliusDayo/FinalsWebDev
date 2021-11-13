@@ -5,8 +5,10 @@
  */
 package models;
 
+import com.lambdaworks.crypto.SCryptUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -67,6 +69,74 @@ public class UserModel {
             }
         }
         return success;
+    }
+    
+    public boolean changePassword(String username,String curr_pass, String new_pass) throws SQLException, ClassNotFoundException{
+       
+        Connection conn = null;
+        PreparedStatement ps = null;
+       
+        boolean success = false;
+        
+        try{
+            
+            String validate_query = "SELECT * FROM users WHERE "
+                    + "username=?";
+            
+            conn = ConnectionDB.getConnection();
+            ps = conn.prepareStatement(validate_query);
+            ps.setString(1,username);
+            System.out.println(curr_pass);
+            System.out.println(new_pass);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            boolean matched = SCryptUtil.check(curr_pass, rs.getString("password"));
+            if(matched){
+                
+                success = change(new_pass,username);
+                
+               
+            }
+            else{
+                rs.next();
+            }
+            conn.close();
+        }catch (SQLException e) {
+            System.out.println("UserRegistry Error: " + e);
+              
+    }
+        return success;
+    }
+    
+    public boolean change(String new_pass, String username) throws ClassNotFoundException{
+        
+        boolean d = false;
+          Connection conn = null;
+          PreparedStatement ps = null;
+          String hashed = SCryptUtil.scrypt(new_pass,16,16,16);
+          System.out.println(hashed);
+        try{
+            
+        String query = "UPDATE `users` SET "
+                        + "`password`=?"
+                        + "WHERE username=?";
+                      
+                conn = ConnectionDB.getConnection();      
+                ps = conn.prepareStatement(query);
+              
+                ps.setString(1,hashed);
+                ps.setString(2,username); 
+                
+                int row_affected = ps.executeUpdate();
+                conn.close();
+            if (row_affected != 0) {
+                d = true;
+            }
+        }catch (SQLException e) {
+            System.out.println("UserRegistry Error: " + e);
+              
+    }
+        return d;
     }
 }
     
