@@ -18,32 +18,35 @@
         <!-- /.card-header -->
         <!-- form start -->
         <div class="card-body">
-            <form role="form" action="${pageContext.request.contextPath}/RegisterUser" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/RegisterUser" method="post" id="register">
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label>First Name</label>
-                        <input class="form-control" type="text" id="first_name" name="first_name">
+                        <input class="form-control" type="text" id="first_name" name="first_name" required>
                     </div>
                     <div class="form-group col-sm-4">
                         <label>Middle Name</label>
-                        <input class="form-control" type="text" id="middle_name" name="middle_name">
+                        <input class="form-control" type="text" id="middle_name" name="middle_name" required>
                     </div>
                     <div class="form-group col-sm-4">
                         <label>Last Name</label>
-                        <input class="form-control" type="text" id="last_name" name="last_name">
+                        <input class="form-control" type="text" id="last_name" name="last_name" required>
                     </div>
                 </div>
-                <div class="row">
+                <div class="column">
                     <div class="form-group col-sm-6">
 
                         <label for="username">Username</label>
-                        <input class="form-control" type="text" id="username" name="username">
+                        <input class="form-control" type="text" id="username" name="username" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Password</label>
-                        <input class="form-control" type="password" id="password" name="password">
+                        <input class="form-control" type="text" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                     </div>
 
+                    
+                    
+                    
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-6">
@@ -63,5 +66,5 @@
     </div>
 
 </div>
-
+            
 <jsp:include page="../templates/footer.jsp"/>
