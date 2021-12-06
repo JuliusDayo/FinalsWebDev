@@ -25,7 +25,7 @@
                 <img src="logo.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><%= session.getAttribute("username")%></a>
+                <a href="${pageContext.request.contextPath}/ProfilePage" class="d-block"><%= session.getAttribute("username")%></a>
             </div>
         </div>
 

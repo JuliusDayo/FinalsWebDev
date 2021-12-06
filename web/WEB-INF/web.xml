@@ -52,6 +52,14 @@
         <servlet-name>RegisterUser</servlet-name>
         <servlet-class>controllers.RegisterUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfilePage</servlet-name>
+        <servlet-class>controllers.ProfilePage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controllers.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterProduct</servlet-name>
         <url-pattern>/RegisterProduct</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
         <url-pattern>/RegisterUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfilePage</servlet-name>
+        <url-pattern>/ProfilePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
