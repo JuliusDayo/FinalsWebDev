@@ -58,6 +58,7 @@
                 background-color: #1ff068;
                 text-align: justify;
             }
+            
         </style>
 
         
@@ -87,7 +88,9 @@
                             <label>New Password</label>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" name="new_pass" id="new_pass">
+                            <input type="text" class="form-control" name="new_pass" id="new_pass"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                         </div>
 
 
@@ -118,8 +121,54 @@
                              }
         
                         };
-                        
-                    </script>
+                        var myInput = document.getElementById("password");
+                        var letter = document.getElementById("letter");
+                        var capital = document.getElementById("capital");
+                        var number = document.getElementById("number");
+                        var length = document.getElementById("length");
+
+
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>
+                    
 <jsp:include page="templates/footer.jsp"/>
+
 
    
