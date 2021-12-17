@@ -52,7 +52,8 @@ public class DeleteController extends HttpServlet {
         rd.forward(request, response);
         }else{
             System.out.println("Failed to Delete Product");
-            response.sendRedirect("/Midterm/Products");
+
+            response.sendRedirect("/Finals/Products");
         }
         
 
