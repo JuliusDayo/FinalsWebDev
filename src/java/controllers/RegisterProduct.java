@@ -59,11 +59,14 @@ public class RegisterProduct extends HttpServlet {
         request.setAttribute("result_icon", result_icon);
         request.setAttribute("result_color", result_color);
         
-        System.out.println(product_name);
-        RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
+String base_url = request.getRequestURI();
+String[] splitt = base_url.split("/") ;
+        System.out.println(splitt);
+response.sendRedirect("/Finals/Products");
+        //RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
        
             
-        rd.forward(request, response);
+        //rd.forward(request, response);
         }else{
             
             result_message = "Register Failed!";
@@ -75,8 +78,8 @@ public class RegisterProduct extends HttpServlet {
             request.setAttribute("visible", visible);
             RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
        
-            
-            rd.forward(request, response);
+            response.sendRedirect("/Products");
+           
         }
         
     }

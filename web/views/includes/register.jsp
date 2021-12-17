@@ -23,7 +23,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="${pageContext.request.contextPath}/RegisterProduct">
+        <form role="form" action="${pageContext.request.contextPath}/RegisterProduct" method="post">
             <div class="card-body">
                 <div class="form-group col-sm-5">
                     <label>ID</label>

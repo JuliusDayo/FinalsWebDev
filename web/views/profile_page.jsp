@@ -90,7 +90,9 @@
                         <div class="col-7">
                             <input type="text" class="form-control" name="new_pass" id="new_pass"
                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
+                                   onkeyup="ifMatched()"
+                                   >
                         </div>
 
 
@@ -99,11 +101,11 @@
                             <label>Confirm Password</label>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" name="confirm_pass" id="confirm_pass" onchange="ifMatched()" value="">
+                            <input type="text" class="form-control" name="confirm_pass" id="confirm_pass" onkeyup="ifMatched()" value="">
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Change Password</button>
+                            <button type="submit" class="btn btn-success" id="change_pass">Change Password</button>
                         </div>
                     </form>
                 </div>
@@ -117,8 +119,11 @@
                         const ifMatched = () =>{
                             
                              if(new_pass.value !== confirm_pass.value){
-                                alert('notmatched');
+                                document.getElementById("change_pass").disabled = true;
+                             }else{
+                               document.getElementById("change_pass").disabled = false;  
                              }
+                             
         
                         };
                         var myInput = document.getElementById("password");
@@ -165,7 +170,7 @@
     length.classList.remove("valid");
     length.classList.add("invalid");
   }
-}
+
 </script>
                     
 <jsp:include page="templates/footer.jsp"/>
