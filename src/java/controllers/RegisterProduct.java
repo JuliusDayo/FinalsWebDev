@@ -50,20 +50,20 @@ public class RegisterProduct extends HttpServlet {
         String success = "0";
         if (addRegistry == true) {
             
-        success = "1";
-        result_message= product_name+" Has been successfully registered!";
-        result_icon = "success";
-        result_color="green";
-        request.setAttribute("visible", visible);
-        request.setAttribute("result_message", result_message);
-        request.setAttribute("result_icon", result_icon);
-        request.setAttribute("result_color", result_color);
-        
-        System.out.println(product_name);
-        RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
-       
-            
-        rd.forward(request, response);
+            success = "1";
+            result_message= product_name+" Has been successfully registered!";
+            result_icon = "success";
+            result_color="green";
+            request.setAttribute("visible", visible);
+            request.setAttribute("result_message", result_message);
+            request.setAttribute("result_icon", result_icon);
+            request.setAttribute("result_color", result_color);
+
+            System.out.println(product_name);
+            RequestDispatcher rd = request.getRequestDispatcher("views/successpage.jsp");
+
+
+            rd.forward(request, response);
         }else{
             
             result_message = "Register Failed!";
@@ -73,7 +73,7 @@ public class RegisterProduct extends HttpServlet {
             request.setAttribute("result_icon", result_icon);
             request.setAttribute("result_color", result_color);
             request.setAttribute("visible", visible);
-            RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("views/failpage.jsp");
        
             
             rd.forward(request, response);

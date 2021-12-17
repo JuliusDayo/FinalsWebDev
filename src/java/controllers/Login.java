@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         try { 
-            Connection conn =null;
+            Connection conn = null;
             PreparedStatement ps = null;
             
             String query = "SELECT login_attempt FROM users WHERE username=?; ";
@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
                 boolean validate = (Boolean) LoginModel.validate(username, password)[0];
                 int role_ID = (int) LoginModel.validate(username, password)[1];
                 if (validate) {
-                    boolean reset = LoginAttempts.add(username, login_attempt);
+                    boolean reset = LoginAttempts.reset(username);
                     if (reset == true) {
                         HttpSession session = request.getSession();
                         session.setAttribute("username", username);
@@ -91,7 +91,6 @@ public class Login extends HttpServlet {
             System.out.println("validate error " +e);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -52,12 +52,15 @@ public class LoginAttempts {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-            String query = "UPDATE `users` SET `login_attempt`=? WHERE username = ?;";
+            String query = "UPDATE `users` SET `login_attempt`=?, `unlock_time`=? WHERE username = ?;";
             
+            long unlock_timeMilli = (946656); 
+            Timestamp unlock_time = new Timestamp(unlock_timeMilli*1000000);
             conn = ConnectionDB.getConnection();
             ps = conn.prepareStatement(query);
             ps.setInt(1, 0);
-            ps.setString(2, username);
+            ps.setTimestamp(2, unlock_time);
+            ps.setString(3, username);
             
             int rowAffected = ps.executeUpdate();
             if (rowAffected != 0) {
@@ -100,7 +103,7 @@ public class LoginAttempts {
                 
                 conn = ConnectionDB.getConnection();
                 ps = conn.prepareStatement(query);
-                ps.setInt(1, newlogin_attempt);
+                ps.setInt(1, 0);
                 ps.setTimestamp(2, unlock_time);
                 ps.setString(3, username);
                 
