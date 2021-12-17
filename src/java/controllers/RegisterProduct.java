@@ -59,10 +59,9 @@ public class RegisterProduct extends HttpServlet {
         request.setAttribute("result_icon", result_icon);
         request.setAttribute("result_color", result_color);
         
-String base_url = request.getRequestURI();
-String[] splitt = base_url.split("/") ;
-        System.out.println(splitt);
-response.sendRedirect("/Finals/Products");
+String base_url = request.getContextPath();
+
+response.sendRedirect(base_url+"/Products");
         //RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
        
             
