@@ -35,11 +35,17 @@ public class LoginModel {
             ResultSet rs=ps.executeQuery();
             rs.next();
             boolean matched = SCryptUtil.check(password, rs.getString("password"));
+ 
             if(matched){
                 data[0] = true;
                 data[1] = rs.getInt("role_ID");
             }else{
             rs.next();
+if(rs.isAfterLast()){
+data[0] = false;
+data[1] = 123;
+}
+
             }
             
             conn.close();

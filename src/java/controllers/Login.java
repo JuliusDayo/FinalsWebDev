@@ -77,12 +77,14 @@ public class Login extends HttpServlet {
                     boolean add = LoginAttempts.add(username, login_attempt); 
                     if (add == true) {
                         System.out.println("failed to login");
+request.setAttribute("failed", "alert('failed to login')");
                         RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
                         rd.forward(request, response);
                     }
                 }
 
             } else {
+request.setAttribute("failed", "alert('account locked')");
                 System.out.println("account lock");
                 RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
                 rd.forward(request, response);

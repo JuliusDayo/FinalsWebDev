@@ -49,8 +49,8 @@ public class ChangePassword extends HttpServlet {
         
         if(changed){
             System.out.println("Success");
-            RequestDispatcher rd = request.getRequestDispatcher("/ProfilePage");
-            rd.forward(request, response);
+            response.sendRedirect("/ProfilePage");
+            
         }else{
             System.out.println("Failed");
            RequestDispatcher rd = request.getRequestDispatcher("/ProfilePage");

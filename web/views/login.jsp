@@ -100,8 +100,12 @@ h1{
 	   <input type="password" input id="password" name="password"placeholder="Enter Password">
 	   <input type="submit" input id="button" name="button" value="Submit">
            <a href="changepass.jsp"> Change password </a>
+           
 	   </div>
             
         </form>
     </body>
+    <script>
+        ${failed}
+    </script>
 </html>
