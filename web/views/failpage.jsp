@@ -15,12 +15,12 @@
         <div class="col-sm-6 col align-self-center">
             <div class="cardi">
 
-                <center><i class="fas fa-check fa-5x" style="color:#9ABC66"></i></center>
+                <center><i class="fas fa-times fa-5x" style="color:#dc3545"></i></center>
 
-                <h1> Register Failed! </h1>
+                <h1 style="color:#dc3545"> Register Failed! </h1>
                 
                 <div class="card-footer">
-            <a href="${pageContext.request.contextPath}/RegisterPage"><button class="btn btn-success">Go Back</button></a>
+            <a href="${pageContext.request.contextPath}/RegisterPage"><button class="btn btn-danger">Go Back</button></a>
         </div>
             </div>
                 

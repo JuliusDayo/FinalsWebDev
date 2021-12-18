@@ -6,7 +6,9 @@
 package controllers;
 
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ConnectionDB;
 import models.LoginModel;
+import models.LoginAttempts;
 
 /**
  *
@@ -41,30 +45,52 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        boolean validate = (Boolean) LoginModel.validate(username, password)[0];
-        int role_ID = (int) LoginModel.validate(username, password)[1];
-       response.setHeader("Cache-Control", "no-cache");
-    response.setHeader("Cache-Control", "no-store");
-    response.setHeader("Pragma", "no-cache");
-    response.setDateHeader("Expires", 0);
-       
-        if (validate) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("role_ID" , role_ID);
+        try { 
+            Connection conn = null;
+            PreparedStatement ps = null;
+            
+            String query = "SELECT login_attempt FROM users WHERE username=?; ";
+            
+            conn = ConnectionDB.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1,username);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            boolean checkLock = LoginAttempts.checkLock(username);
+            int login_attempt = rs.getInt("login_attempt");
+            if (checkLock == true) {
+                boolean validate = (Boolean) LoginModel.validate(username, password)[0];
+                int role_ID = (int) LoginModel.validate(username, password)[1];
+                if (validate) {
+                    boolean reset = LoginAttempts.reset(username);
+                    if (reset == true) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("username", username);
+                        session.setAttribute("role_ID" , role_ID);
 
-            if (!session.isNew()) {
-                RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");
-                rd.include(request, response);
+                        if (!session.isNew()) {
+                            RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");
+                            rd.include(request, response);
+                        }
+                    }
+                } else {
+                    boolean add = LoginAttempts.add(username, login_attempt); 
+                    if (add == true) {
+                        System.out.println("failed to login");
+                        RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+                        rd.forward(request, response);
+                    }
+                }
+
+            } else {
+                System.out.println("account lock");
+                RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+                rd.forward(request, response);
             }
-        } else {
-
-            System.out.println("failed to login");
-            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
-            rd.forward(request, response);
+        }catch(SQLException e){
+            System.out.println("validate error " +e);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
