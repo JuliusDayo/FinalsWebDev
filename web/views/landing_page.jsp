@@ -8,6 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <% response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setDateHeader("Expires", 0);%>
         <title>3C's Grocery</title>
         <style>
 
@@ -18,7 +21,7 @@
                 background-attachment: scroll;
             }
             .btn-group .button {
-                background-color: #66cc66; 
+                background-color: #66cc66;
                 border: 1px solid green;
                 color: white;
                 padding: 10px 70px;
@@ -29,11 +32,12 @@
                 cursor: pointer;
                 float: right;
             }
-            .btn-group .button {border-radius: 12px;
+            .btn-group .button {
+                border-radius: 12px;
             }
 
             .btn-group .button:not(:last-child) {
-                border-right: none; 
+                border-right: none;
             }
 
             .btn-group .button {
@@ -57,7 +61,7 @@
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
                 <img class="navbar-brand" src="logo.png" alt="3C's Grocery" width="50" height="50"/> 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    
+
                     <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item">     
@@ -75,7 +79,7 @@
                         <li class="nav-item">
                             <a class="nav-link" onclick="window.location.href = 'PROMO.html'">PROMOS</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </nav>

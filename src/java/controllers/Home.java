@@ -42,7 +42,10 @@ public class Home extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         String sessname = (String)session.getAttribute("username");
-        System.out.print(sessname);
+        response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
         if (!session.isNew()) {
 
             RequestDispatcher rd = request.getRequestDispatcher("views/includes/dashboard.jsp");

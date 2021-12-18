@@ -35,7 +35,10 @@ public class Logout extends HttpServlet {
         
         HttpSession session = request.getSession();
         session.invalidate();
-        
+        response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
         RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
         rd.forward(request,response);
         

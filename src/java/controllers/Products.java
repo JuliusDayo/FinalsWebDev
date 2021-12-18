@@ -34,7 +34,10 @@ public class Products extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession(false);
-        String sessname = (String) session.getAttribute("username");
+        String sessname = (String) session.getAttribute("username");response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
         if (sessname != null) {
            
             

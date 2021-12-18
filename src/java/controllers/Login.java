@@ -43,7 +43,10 @@ public class Login extends HttpServlet {
 
         boolean validate = (Boolean) LoginModel.validate(username, password)[0];
         int role_ID = (int) LoginModel.validate(username, password)[1];
-       
+       response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
        
         if (validate) {
             HttpSession session = request.getSession();

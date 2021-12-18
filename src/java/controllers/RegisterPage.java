@@ -38,7 +38,10 @@ public class RegisterPage extends HttpServlet {
         String sessname = (String) session.getAttribute("username");
         
       
-        
+        response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
         if (sessname != null) {
         RequestDispatcher rd = request.getRequestDispatcher("views/includes/register.jsp");
         rd.forward(request, response);
