@@ -19,6 +19,7 @@ public class UserModel {
     
     public boolean addUser(String first_name,String middle_name ,String last_name, String username, String password, int role_ID) throws ClassNotFoundException, SQLException{
         
+        //Adds user info into database
         
         Connection conn = null;
         PreparedStatement ps = null;
