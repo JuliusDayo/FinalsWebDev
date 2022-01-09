@@ -37,6 +37,7 @@ public class DeleteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
+        //Checks the product id of the item to be deleted
         
         int product_ID = Integer.parseInt(request.getParameter("product_ID"));
         
@@ -44,9 +45,9 @@ public class DeleteController extends HttpServlet {
         EditProduct deletereg = new EditProduct();
         boolean deleteRegistry = deletereg.deleteRegistry(product_ID);
         
+        //Validates if the value is successfully deleted
+        
         if (deleteRegistry == true) {
-            
-             
         
         RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
         rd.forward(request, response);

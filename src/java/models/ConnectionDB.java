@@ -20,6 +20,8 @@ public class ConnectionDB {
         public static Connection getConnection() throws ClassNotFoundException, SQLException{
 
 
+            //connects to the database
+            
         try{
         String driver = "com.mysql.cj.jdbc.Driver";
         Class.forName(driver);

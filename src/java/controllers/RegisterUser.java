@@ -43,6 +43,8 @@ public class RegisterUser extends HttpServlet {
         String password = request.getParameter("password");
         int role_ID = Integer.parseInt(request.getParameter("role"));
         
+        //Hashes the inputted password
+        
         String hashed = SCryptUtil.scrypt(password,16,16,16);
         
         UserModel add = new UserModel();
@@ -50,6 +52,8 @@ public class RegisterUser extends HttpServlet {
         boolean addUser = add.addUser(first_name,middle_name,last_name,username,hashed,role_ID);
         
         System.out.println(hashed);
+        
+        //validates if the value has been added
         
         if(addUser){
             System.out.println("Success");

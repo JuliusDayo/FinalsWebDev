@@ -36,9 +36,12 @@ public class ChangePassword extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
+        //Request for the value from changepass.jsp
+        
         String curr_pass = request.getParameter("curr_pass");
         String new_pass = request.getParameter("new_pass");
         
+        //Checks the current username in use
         
         HttpSession session = request.getSession(false);
         String username = (String) session.getAttribute("username");
@@ -46,6 +49,8 @@ public class ChangePassword extends HttpServlet {
        
         UserModel changePass = new UserModel();
         boolean changed =  changePass.changePassword(username, curr_pass, new_pass);
+        
+        //Validates if Password has been changed
         
         if(changed){
             System.out.println("Success");

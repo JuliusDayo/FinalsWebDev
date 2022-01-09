@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class EditProduct {
     
     
-    
+   //Updates the item in the database 
     
     public boolean editRegistry(
             int product_ID,
@@ -54,6 +54,9 @@ public class EditProduct {
         } catch (SQLException e) {
             System.out.println("editRegistry Error: " + e);
         } finally {
+            
+            //Validates the changes that has been changed
+            
             if (ps != null) {
                 try {
                     ps.close();
@@ -73,6 +76,9 @@ public class EditProduct {
         }
         return success;
     }
+    
+    //Adds values to the database
+    
     public boolean addRegistry(
             int product_ID,
             int brand_ID,
@@ -107,6 +113,9 @@ public class EditProduct {
         } catch (SQLException e) {
             System.out.println("addRegistry Error: " + e);
         } finally {
+            
+            //Validates if changes have been made
+            
             if (ps != null) {
                 try {
                     ps.close();

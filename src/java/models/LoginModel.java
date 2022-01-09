@@ -20,6 +20,8 @@ public class LoginModel {
     public static Object[] validate(String username,String password) throws ClassNotFoundException, SQLException{
         Object[] data = new Object[2];
         
+        //Validates if the given value matches the value in the database
+        
         data[0] = false;
         try{
             Connection conn =null;
