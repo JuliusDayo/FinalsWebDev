@@ -7,7 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Main Sidebar Container -->
-
+<style>
+    .isDisabled{
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none
+    }
+</style>
 <aside class="main-sidebar sidebar-dark-primary  navbar-olive elevation-4">
     <!-- Brand Logo -->
 
@@ -44,13 +52,31 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/RegisterPage" class="nav-link">
+                     <ul class="nav nav-treeview">
+                    <%
+                   int can_add = (int)session.getAttribute("can_add");
+                   if(can_add==0){
+                %>
+                   
+                        <li class="nav-item "  data-trigger="hover" data-toggle="popover" data-content="You Don't have permission" data-placement="top">
+
+                            <a href="${pageContext.request.contextPath}/RegisterPage" class="nav-link disabled">
                                 <i class="fas fa-dolly-flatbed"></i>
                                 <p>Add Product</p>
+
                             </a>
                         </li>
+                        <% }if(can_add==1){ %>   
+                        
+                        <li class="nav-item "  >
+
+                            <a href="${pageContext.request.contextPath}/RegisterPage" class="nav-link ">
+                                <i class="fas fa-dolly-flatbed"></i>
+                                <p>Add Product</p>
+
+                            </a>
+                        </li>
+                        <% }%>   
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/RegisterBrandCategPage" class="nav-link">
                                 <i class="fas fa-book"></i>
@@ -66,7 +92,7 @@
                         </li>
                     </ul>
                 </li>
-                <%
+                 <%
                     int role = (int) session.getAttribute("role_ID");
                     if(role==1){
                 %>
@@ -76,11 +102,17 @@
                         <p>Users</p>
                     </a>
                 </li>
-                <% } %>         
-                                
+                <% } %>  
+                       
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    $('.disabled').popover({
+        trigger: 'focus'
+    })
+</script>

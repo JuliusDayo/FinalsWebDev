@@ -16,39 +16,41 @@ import java.sql.SQLException;
  * @author user
  */
 public class LoginModel {
-    
-    public static Object[] validate(String username,String password) throws ClassNotFoundException, SQLException{
-        Object[] data = new Object[2];
-        
+
+    public static Object[] validate(String username, String password) throws ClassNotFoundException, SQLException {
+        Object[] data = new Object[5];
+
         //Validates if the given value matches the value in the database
-        
         data[0] = false;
-        try{
-            Connection conn =null;
+        try {
+            Connection conn = null;
             PreparedStatement ps = null;
-            
-            String query = "SELECT username,password,role_ID FROM users "
+
+            String query = "SELECT * FROM users INNER join user_roles on users.role_ID = user_roles.role_ID "
                     + "WHERE username =?; ";
-            
+
             conn = ConnectionDB.getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1,username);
-            
-            ResultSet rs=ps.executeQuery();
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
             rs.next();
             boolean matched = SCryptUtil.check(password, rs.getString("password"));
-            if(matched){
+            if (matched) {
                 data[0] = true;
                 data[1] = rs.getInt("role_ID");
-            }else{
-            rs.next();
+                data[2] = rs.getInt("can_add");
+                data[3] = rs.getInt("can_edit");
+                data[4] = rs.getInt("can_delete");
+            } else {
+                rs.next();
             }
-            
+
             conn.close();
-        }catch(SQLException e){
-            System.out.println("validate error " +e);
+        } catch (SQLException e) {
+            System.out.println("validate error " + e);
         }
         return data;
     }
-    
+
 }

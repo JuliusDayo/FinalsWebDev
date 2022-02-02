@@ -16,7 +16,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="resources/style.css">
         <link rel="stylesheet" href="resources/reg.css">
-        
+        <link href="https://unpkg.com/@popperjs/core@2">
         
         
         
@@ -37,7 +37,7 @@
                         <a href="#" class="nav-link">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             Help
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -78,3 +78,4 @@
                 <section class="content">
                     <!-- .container-fluid-->
                     <div class="container-fluid">
+     

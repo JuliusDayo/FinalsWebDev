@@ -97,7 +97,13 @@ $(function () {
 function alertName(){
 alert("Form has been submitted");
 }; 
+
 </script> 
+<script> 
+  $(function () {
+  $('[data-toggle="popover"]').popover()
+})  
+    </script>
 </html>
 
 
