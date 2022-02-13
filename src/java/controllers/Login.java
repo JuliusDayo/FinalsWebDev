@@ -50,18 +50,19 @@ public class Login extends HttpServlet {
     
 
         boolean validate = (Boolean) LoginModel.validate(username, password)[0];
-        int role_ID = (int) LoginModel.validate(username, password)[1];
+        
+       
+        if (validate) {
+int role_ID = (int) LoginModel.validate(username, password)[1];
         int can_add = (int) LoginModel.validate(username, password)[2];
         int can_edit = (int) LoginModel.validate(username, password)[3];
         int can_delete = (int) LoginModel.validate(username, password)[4];
-       
-        if (validate) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role_ID" , role_ID);
-session.setAttribute("can_add", can_add);
-session.setAttribute("can_edit", can_edit);
-session.setAttribute("can_delete", can_delete);
+            session.setAttribute("can_add", can_add);
+            session.setAttribute("can_edit", can_edit);
+            session.setAttribute("can_delete", can_delete);
 
             if (!session.isNew()) {
                 RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");

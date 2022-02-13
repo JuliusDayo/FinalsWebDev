@@ -43,7 +43,12 @@ public class LoginModel {
                 data[3] = rs.getInt("can_edit");
                 data[4] = rs.getInt("can_delete");
             } else {
+
                 rs.next();
+                if (rs.isAfterLast()) {
+                    data[0] = false;
+                    
+                }
             }
 
             conn.close();
