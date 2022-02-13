@@ -42,6 +42,37 @@ public class RegisterUser extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int role_ID = Integer.parseInt(request.getParameter("role"));
+        int Add = Integer.parseInt(request.getParameter("cbadd"));
+        int Edit = Integer.parseInt(request.getParameter("cbedit"));
+        int Delete = Integer.parseInt(request.getParameter("cbdelete"));
+        
+        if (role_ID != 1) {
+            if (Add != 1){
+                if (Edit != 1) {
+                    if (Delete != 1){
+                        role_ID = 2;
+                    } else {
+                        role_ID = 5;
+                    }
+                } else {
+                    if (Delete != 1){
+                        role_ID = 4;
+                    } else {
+                        role_ID = 7;
+                    }
+                }
+            } else {
+                if (Edit != 1) {
+                    if (Delete != 1){
+                        role_ID = 3;
+                    }
+                } else {
+                    if (Delete != 1){
+                        role_ID = 6;
+                    }
+                }
+            }
+        }
         
         //Hashes the inputted password
         
