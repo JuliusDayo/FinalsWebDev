@@ -135,7 +135,7 @@ public class EditProduct {
         }
         return success;
     }
-    public boolean deleteRegistry(int product_ID)
+    public boolean deleteRegistry(int product_ID)//Delete values to the database
             throws ClassNotFoundException, SQLException {
         boolean success = false;
         Connection conn = null;
@@ -157,6 +157,7 @@ public class EditProduct {
         } catch (SQLException e) {
             System.out.println("deleteRegistry Error: " + e);
         } finally {
+            //Validates if changes have been made
             if (ps != null) {
                 try {
                     ps.close();
