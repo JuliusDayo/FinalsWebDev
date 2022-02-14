@@ -132,6 +132,7 @@ public class UserModel {
                 
                 int row_affected = ps.executeUpdate();
                 conn.close();
+            //Validates if changes have been made
             if (row_affected != 0) {
                 d = true;
             }
