@@ -52,6 +52,7 @@ public class UserModel {
         } catch (SQLException e) {
             System.out.println("UserRegistry Error: " + e);
         } finally {
+            //Validates if changes have been made
             if (ps != null) {
                 try {
                     ps.close();
@@ -73,7 +74,7 @@ public class UserModel {
     }
     
     public boolean changePassword(String username,String curr_pass, String new_pass) throws SQLException, ClassNotFoundException{
-       
+       //Validates if given values matches in database
         Connection conn = null;
         PreparedStatement ps = null;
        
@@ -110,6 +111,7 @@ public class UserModel {
     }
     
     public boolean change(String new_pass, String username) throws ClassNotFoundException{
+        //Change user password into database
         
         boolean d = false;
           Connection conn = null;
