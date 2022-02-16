@@ -26,6 +26,15 @@
 <sql:query dataSource = "${snapshot}" var = "result">
     SELECT * FROM products inner join brands on brands.brand_ID = products.brand_ID inner join categories on categories.category_ID = products.category_ID;
 </sql:query>
+<style>
+    .isDisabled{
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none
+    }
+</style>
 
 <div class="card">
     <div class="card-header bg-primary">
@@ -62,15 +71,20 @@
                         <td><c:out value ="${row.brand_name}"/></td>
                         <td><c:out value ="${row.product_stocks}"/></td>
                         <td class="">
-                            <% int role = (int) session.getAttribute("role_ID");%>
-                            <button class="btn-success btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${row.product_ID}"
-                                    <% if(role!=1){ %>
-                                        disabled
-                                    <% } %>
-                                    ><i class="fas fa-edit" ></i></button>
-                            <button class="btn-danger btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-${row.product_ID}"
-                                    <% if(role!=1){ %> disabled <% } %>
-                                    ><i class="fas fa-trash-alt" ></i></button>
+                            <% int role = (int) session.getAttribute("role_ID");
+                                int can_edit = (int) session.getAttribute("can_edit");
+
+                                int can_delete = (int) session.getAttribute("can_delete");%>
+                            <div  <% if (can_edit == 0) { %>data-trigger="hover" data-toggle="popover" data-content="You don't have permission to edit" data-placement="left" <% }%>>
+                                <button class="btn-success btn  <% if (can_edit == 0) { %>isDisabled <% }%>" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${row.product_ID}"
+
+                                        ><i class="fas fa-edit" ></i></button>
+                            </div>
+                            <div   <% if (can_delete == 0) { %>data-trigger="hover" data-toggle="popover" data-content="You don't have permission to delete" data-placement="left" <% }%>>
+                                <button class="btn-danger btn  <% if (can_delete == 0) { %>isDisabled <% }%>" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-${row.product_ID}"
+
+                                        ><i class="fas fa-trash-alt" ></i></button>
+                            </div>
                             <form action="${pageContext.request.contextPath}/EditController" type="submit">
                                 <input  hidden>
 
@@ -208,7 +222,11 @@
         template: '#success'
     })
 </script>
-
+<script>
+    $('.disabled').popover({
+        trigger: 'focus'
+    })
+</script>
 
 
 

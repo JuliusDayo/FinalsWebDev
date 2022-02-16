@@ -34,32 +34,34 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
-
-
-    Login Sevlet
-    Takes username and password from form post
-    validates if password match stored passsword
-
+     *
+     *
+     * Login Sevlet Takes username and password from form post validates if
+     * password match stored passsword
+     *
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
 
+
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-    
-
         boolean validate = (Boolean) LoginModel.validate(username, password)[0];
-        
-       
+
         if (validate) {
-int role_ID = (int) LoginModel.validate(username, password)[1];
-        int can_add = (int) LoginModel.validate(username, password)[2];
-        int can_edit = (int) LoginModel.validate(username, password)[3];
-        int can_delete = (int) LoginModel.validate(username, password)[4];
+            int role_ID = (int) LoginModel.validate(username, password)[1];
+            int can_add = (int) LoginModel.validate(username, password)[2];
+            int can_edit = (int) LoginModel.validate(username, password)[3];
+            int can_delete = (int) LoginModel.validate(username, password)[4];
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            session.setAttribute("role_ID" , role_ID);
+            session.setAttribute("role_ID", role_ID);
             session.setAttribute("can_add", can_add);
             session.setAttribute("can_edit", can_edit);
             session.setAttribute("can_delete", can_delete);

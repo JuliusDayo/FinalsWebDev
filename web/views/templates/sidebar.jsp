@@ -7,15 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Main Sidebar Container -->
-<style>
-    .isDisabled{
-        color: currentColor;
-        cursor: not-allowed;
-        opacity: 0.5;
-        text-decoration: none;
-        pointer-events: none
-    }
-</style>
+
 <aside class="main-sidebar sidebar-dark-primary  navbar-olive elevation-4">
     <!-- Brand Logo -->
 
