@@ -85,9 +85,19 @@ h1{
 
 </style>
 </head>
+<script>
+function validateForm() {
+  var x = document.forms["Login"]["username"].value;
+  if (x == "" || x == null) {
+    alert("Username must be filled out");
+    return false;
+  }
+}
+</script>
+</head>
 <body>
            
-           <form action="${pageContext.request.contextPath}/Login" method="post">
+           <form name="Login" action="${pageContext.request.contextPath}/Login" onsubmit="return validateForm()" method="post">
            
            <div class="login-box">
            <img src="logo.png" class="avatar">   
@@ -97,11 +107,14 @@ h1{
 	   <input type="text" input id="username" name="username"placeholder="Enter Username">
 	   
 	   <label for="password"> Password </label> 
-	   <input type="password" input id="password" name="password"placeholder="Enter Password">
+	   <input type="password" input id="password" name="password"placeholder="Enter Password" required>
 	   <input type="submit" input id="button" name="button" value="Submit">
-           <a href="changepass.jsp"> Change password </a>
+           
 	   </div>
             
         </form>
     </body>
 </html>
+
+
+
