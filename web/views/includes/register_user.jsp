@@ -54,6 +54,12 @@
                         <select class="form-control" id="role" name="role">
                             <option value="1">Manager</option>
                             <option value="2">Staff</option>
+                            <option value="3">Add</option>
+                            <option value="4">Edit</option>
+                            <option value="5">Delete</option>
+                            <option value="6">Add/Edit</option
+                            <option value="7">Delete/Edit</option>
+                            
                         </select>
                     </div>
                 </div>
