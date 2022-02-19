@@ -66,11 +66,7 @@ public class Login extends HttpServlet {
             ps = conn.prepareStatement(query);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            if (rs.next() == false) {
-                request.setAttribute("alertModal", true);
-                RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
-                rd.forward(request, response);
-            }
+            
             rs.next();
 
             boolean checkLock = LoginAttempts.checkLock(username);
