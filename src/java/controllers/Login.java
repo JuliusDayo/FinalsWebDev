@@ -6,7 +6,9 @@
 package controllers;
 
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.LoginModel;
+import models.ConnectionDB;
+import models.LoginAttempts;
 
 /**
  *
@@ -52,35 +56,65 @@ public class Login extends HttpServlet {
 
         boolean validate = (Boolean) LoginModel.validate(username, password)[0];
 
-        int attempts = 0;
-        if (attempts <= 3) {
-request.setAttribute("alertModal", "hidden");
-            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
-            rd.forward(request, response);
-        }
-        if (validate) {
-            int role_ID = (int) LoginModel.validate(username, password)[1];
-            int can_add = (int) LoginModel.validate(username, password)[2];
-            int can_edit = (int) LoginModel.validate(username, password)[3];
-            int can_delete = (int) LoginModel.validate(username, password)[4];
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("role_ID", role_ID);
-            session.setAttribute("can_add", can_add);
-            session.setAttribute("can_edit", can_edit);
-            session.setAttribute("can_delete", can_delete);
+        try {
+            Connection conn = null;
+            PreparedStatement ps = null;
 
-            if (!session.isNew()) {
-                RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");
-                rd.include(request, response);
+            String query = "SELECT login_attempt FROM users WHERE username=?; ";
+
+            conn = ConnectionDB.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next() == false) {
+                request.setAttribute("alertModal", true);
+                RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+                rd.forward(request, response);
             }
-        } else {
-            attempts++;
-            System.out.println("failed to login");
-request.setAttribute("attempts", attempts);
-            request.setAttribute("alertModal", true);
-            RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
-            rd.forward(request, response);
+            rs.next();
+
+            boolean checkLock = LoginAttempts.checkLock(username);
+            int login_attempt = rs.getInt("login_attempt");
+
+            if (checkLock == true) {
+                if (validate) {
+                    boolean reset = LoginAttempts.add(username, login_attempt);
+                    if (reset == true) {
+                        int role_ID = (int) LoginModel.validate(username, password)[1];
+                        int can_add = (int) LoginModel.validate(username, password)[2];
+                        int can_edit = (int) LoginModel.validate(username, password)[3];
+                        int can_delete = (int) LoginModel.validate(username, password)[4];
+                        HttpSession session = request.getSession();
+                        session.setAttribute("username", username);
+                        session.setAttribute("role_ID", role_ID);
+                        session.setAttribute("can_add", can_add);
+                        session.setAttribute("can_edit", can_edit);
+                        session.setAttribute("can_delete", can_delete);
+
+                        if (!session.isNew()) {
+                            RequestDispatcher rd = request.getRequestDispatcher("/views/includes/dashboard.jsp");
+                            rd.include(request, response);
+                        }
+                    }
+                } else {
+                    boolean add = LoginAttempts.add(username, login_attempt);
+                    if (add == true) {
+                        System.out.println("failed to login");
+                        request.setAttribute("alertModal", true);
+                        RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+                        rd.forward(request, response);
+                    }
+
+                }
+            } else {
+                System.out.println("locked");
+                request.setAttribute("alertModal", true);
+                request.setAttribute("alertMessage", "You've Been locked");
+                RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+                rd.forward(request, response);
+            }
+        } catch (SQLException e) {
+            System.out.println("validate error " + e);
         }
     }
 

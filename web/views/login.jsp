@@ -114,7 +114,7 @@
 <c:if test="${alertModal}">
     
     <div class="alert alert-danger" role="alert" <c:out default="hidden" value="no"/> />
-        Your username and password does not match. 
+         <c:out default="Your username and password does not match." value="${alertMessage}"/>
     </div>
     
 </c:if>   
