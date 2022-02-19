@@ -42,8 +42,6 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
-
 
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Cache-Control", "no-store");
@@ -54,6 +52,12 @@ public class Login extends HttpServlet {
 
         boolean validate = (Boolean) LoginModel.validate(username, password)[0];
 
+        int attempts = 0;
+        if (attempts <= 3) {
+request.setAttribute("alertModal", "hidden");
+            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
+            rd.forward(request, response);
+        }
         if (validate) {
             int role_ID = (int) LoginModel.validate(username, password)[1];
             int can_add = (int) LoginModel.validate(username, password)[2];
@@ -71,9 +75,11 @@ public class Login extends HttpServlet {
                 rd.include(request, response);
             }
         } else {
-
+            attempts++;
             System.out.println("failed to login");
-            RequestDispatcher rd = request.getRequestDispatcher("views/landing_page.jsp");
+request.setAttribute("attempts", attempts);
+            request.setAttribute("alertModal", true);
+            RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
             rd.forward(request, response);
         }
     }

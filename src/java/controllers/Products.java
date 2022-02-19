@@ -42,7 +42,7 @@ public class Products extends HttpServlet {
            
             
             String visible = "false";
-            request.setAttribute("visible", visible);
+            request.setAttribute("visible", "hidden");
             RequestDispatcher rd = request.getRequestDispatcher("views/includes/product_list.jsp");
             rd.forward(request, response);
         }else{
